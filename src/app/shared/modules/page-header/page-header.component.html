@@ -5,9 +5,15 @@
         </h2>
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']">Dashboard</a>
+                <i class="fa fa-dashboard"></i> <a href="Javascript:void(0)" [routerLink]="['/dashboard']"> Dashboard</a>
             </li>
-            <li class="breadcrumb-item active"><i class="fa {{icon}}"></i> {{heading}}</li>
+            <ng-container *ngFor="let breadCrumb of breadCrumbs; let last=last;">
+              <ng-container *ngIf="!last; then thenBlock else elseBlock"></ng-container>
+
+              <ng-template #thenBlock><li class="breadcrumb-item">  <i class="fa {{breadCrumb[2]}}"></i> <a href="Javascript:void(0)" [routerLink]="[breadCrumb[1]]">{{breadCrumb[0]}}</a></li></ng-template>
+              <ng-template #elseBlock> <li class="breadcrumb-item"> <i class="fa {{breadCrumb[2]}}"></i>{{breadCrumb[0]}}</li></ng-template>
+            </ng-container>
+            <!-- <li class="breadcrumb-item active"><i class="fa {{icon}}"></i> {{heading}}</li> -->
         </ol>
     </div>
 </div>

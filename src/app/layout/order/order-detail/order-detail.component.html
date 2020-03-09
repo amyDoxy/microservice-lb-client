@@ -1,0 +1,203 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Orders'"
+    [breadCrumbs]="[[' Orders','/orders',' fa-shopping-cart fa-4'], [' Order','/orders','fa-shopping-cart fa-4']]"></app-page-header>
+    <div class="row orderForm">
+      <div class="col col-xl-12 col-lg-12">
+
+          <div class="card mb-3" *ngIf="selectedOrder">
+              <div class="card-header">Modify Order</div>
+              <div class="col col-sm-12 col-xs-12 col-lg-12">
+
+
+                <form #orderForm="ngForm" style="margin-top: 1%;">
+
+                  <div class="row">
+                    <div class="col col-sm-1 col-xs-1 col-lg-1"></div>
+
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>PO Business Unit</label>
+                        <input [(ngModel)]="selectedOrder.organizationName" name="organizationName" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+
+                    <div class="col col-sm-4 col-xs-4 col-lg-4"></div>
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Warehouse</label>
+                          <!-- <select [(ngModel)]="selectedOrder.inventoryOrgCode" name="inventoryOrgCode" (change) = "onOrgCodeChange()" class="form-control orderForm">
+                            <option *ngFor="let org of organizations" [ngValue]="org.organizationCode">{{org.organizationCode}} &ensp; {{org.name}}</option>
+                          </select> -->
+                          <ng-select [items]="organizations"
+                             bindLabel="name"
+                             bindValue="organizationCode"
+                             (change) = "onOrgCodeChange()"
+                             [(ngModel)]="selectedOrder.inventoryOrgCode" name="inventoryOrgCode">
+                           </ng-select>
+
+                      </fieldset>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col col-sm-1 col-xs-1 col-lg-1"></div>
+
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Order Number</label>
+                        <input [(ngModel)]="selectedOrder.orderNum" name="orderNum" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+
+                    <div class="col col-sm-4 col-xs-4 col-lg-4"></div>
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Order Date</label>
+                        <input type="date" [ngModel]="selectedOrder.orderDate| date:'yyyy-MM-dd'" (ngModelChange)="selectedOrder.orderDate = $event" name="orderDate" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col col-sm-1 col-xs-1 col-lg-1"></div>
+
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Customer Number</label>
+                          <!-- <select [(ngModel)]="selectedOrder.customerNumber" name="customerNumber" (change) = "onCustomerChange()" class="form-control orderForm">
+                            <option *ngFor="let cust of customers" [ngValue]="cust.custNumber">{{cust.custNumber}} &ensp; {{cust.custName}}</option>
+                          </select> -->
+                          <ng-select [items]="customers"
+                             bindLabel="custName"
+                             bindValue="custNumber"
+                              (change) = "onCustomerChange()"
+                             [(ngModel)]="selectedOrder.customerNumber" name="customerNumber">
+                           </ng-select>
+                      </fieldset>
+                    </div>
+
+                    <div class="col col-sm-4 col-xs-4 col-lg-4"></div>
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Customer Name</label>
+                        <input [(ngModel)]="selectedOrder.customerName" name="customerName" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col col-sm-1 col-xs-1 col-lg-1"></div>
+
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Bill To Address</label>
+                        <input [(ngModel)]="selectedOrder.billToAddress1" name="billToAddress1" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+
+                    <div class="col col-sm-4 col-xs-4 col-lg-4"></div>
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Ship to Address</label>
+                        <input [(ngModel)]="selectedOrder.shipToAddress1" name="shipToAddress1" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col col-sm-1 col-xs-1 col-lg-1"></div>
+
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Order Status</label>
+                        <input [(ngModel)]="selectedOrder.orderStatus" name="orderStatus" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+
+                    <div class="col col-sm-4 col-xs-4 col-lg-4"></div>
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+
+                    </div>
+                  </div>
+
+                  <div class="row" style="margin: 2%;">
+                    <div class="col col-sm-1 col-xs-1 col-lg-1"></div>
+
+                    <div class="col col-sm-1 col-xs-1 col-lg-1">
+                      <fieldset class="form-group">
+                          <label>Quantity</label>
+                        <input type="number" [(ngModel)]="newOrderLine.qty" name="qty" required class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+
+                    <div class="col col-sm-2 col-xs-2 col-lg-2"></div>
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Item</label>
+                          <!-- <select [(ngModel)]="newOrderLine.itemNumber" name="itemNumber" (change) = "onItemChange()" class="form-control orderForm">
+                            <option *ngFor="let it of items" [ngValue]="it.itemNumber">{{it.itemNumber}} &ensp; {{it.description}}</option>
+                          </select> -->
+                          <ng-select [items]="items"
+                             bindLabel="description"
+                             bindValue="itemNumber"
+                             (change) = "onItemChange()"
+                             [(ngModel)]="newOrderLine.itemNumber" name="itemNumber">
+                           </ng-select>
+
+                      </fieldset>
+                    </div>
+                    <div class="col col-sm-2 col-xs-2 col-lg-2">
+                      <fieldset class="form-group">
+                          <label>Item Name</label>
+
+                        <input [(ngModel)]="newOrderLine.itemName" name="itemName" required readonly class="form-control orderForm">
+
+                      </fieldset>
+                    </div>
+                    <div class="col col-sm-1 col-xs-1 col-lg-1" style="margin-top: 1.5%;">
+                      <fieldset class="form-group">
+                        <button type="button" name="button"  class="form-control btn btn-sm btn-info" [disabled]="clicked" (click)="onAddLine(); ">Add Line</button>
+
+                      </fieldset>
+                    </div>
+                  </div>
+
+
+
+                </form>
+
+                <table class="card-body table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Line Number</th>
+                        <th>Item Number</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                      <tr *ngFor="let line of selectedOrderLines">
+                          <td>{{line.lineNbr}}</td>
+                        <td>{{line.itemNumber}}</td>
+                          <td>{{line.itemName}}</td>
+                          <td>{{line.qty}}</td>
+                          <td><a class="sortable-header"
+                            (click)="onDeleteLine(line);"><i class="fa fa-fw fa-trash-o" style="font-size:24px;color:red"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div [@routerTransition]>
+  <app-page-header [heading]="'Orders'"
+    [breadCrumbs]="[['Orders','#','fa-shopping-cart fa-4']]"></app-page-header>
+    <div class="row">
+      <div class="col col-xl-12 col-lg-12">
+        <div class="card mb-3">
+            <div class="card-header">Orders</div>
+            <table class="card-body table table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Order Number</th>
+                    <th>Customer Name</th>
+                    <th>Org code</th>
+                    <th>View</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <div *ngIf="allOrders.length >0; then t1 else t2 "></div>
+                  <ng-template #t1>
+                    <tr *ngFor="let order of allOrders">
+                      <td>{{order.dPk}}</td>
+                    <td>{{order.orderNum}}</td>
+        							<td>{{order.customerName}}</td>
+                      <td>{{order.inventoryOrgCode}}</td>
+                      <td><a class="sortable-header"
+        								(click)="onOrderDetail(order);"><i class="fa fa-fw fa-pencil-square-o"></i></a></td>
+                    </tr>
+                  </ng-template>
+                	<ng-template #t2>No Order found</ng-template>
+                </tbody>
+            </table>
+        </div>
+      </div>
+    </div>
+</div>

@@ -4,6 +4,7 @@
 @import "utils";
 @import "rtl";
 @import "responsive";
+@import "~@ng-select/ng-select/themes/material.theme.css";
 
 @media print {
     .breadcrumb {

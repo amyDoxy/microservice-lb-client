@@ -1,5 +1,5 @@
 {
-  "name": "sb-admin-bs4-angular-8",
+  "name": "ng-payroll",
   "version": "8.0.0",
   "license": "Apache",
   "scripts": {
@@ -10,7 +10,9 @@
     "test": "ng test",
     "test-ci": "TEST_CI=true ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "docker:build": "docker build -t lb-client .",
+    "docker:run": "docker run -p 4200:4200 -d lb-client"
   },
   "private": true,
   "dependencies": {
@@ -19,10 +21,12 @@
     "@angular/compiler": "8.0.0",
     "@angular/core": "8.0.0",
     "@angular/forms": "8.0.0",
+    "@angular/http": "^7.2.15",
     "@angular/platform-browser": "8.0.0",
     "@angular/platform-browser-dynamic": "8.0.0",
     "@angular/router": "8.0.0",
     "@ng-bootstrap/ng-bootstrap": "4.2.1",
+    "@ng-select/ng-select": "^2.20.5",
     "@ngx-translate/core": "11.0.1",
     "@ngx-translate/http-loader": "4.0.0",
     "chart.js": "2.7.3",
@@ -35,7 +39,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.800.0",
+    "@angular-devkit/build-angular": "^0.800.6",
     "@angular/cli": "8.0.2",
     "@angular/compiler-cli": "8.0.0",
     "@angular/language-service": "8.0.0",

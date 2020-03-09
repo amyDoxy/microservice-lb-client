@@ -4,7 +4,11 @@
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>{{ 'Dashboard' | translate }}</span>
         </a>
-        <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a [routerLink]="['/orders']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-shopping-cart"></i>&nbsp;
+            <span>{{ 'Orders' | translate }}</span>
+        </a>
+        <!-- <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;
             <span>{{ 'Charts' | translate }}</span>
         </a>
@@ -60,10 +64,10 @@
             <i class="fa fa-file-o"></i>&nbsp;
             <span>{{ 'Blank Page' | translate }}</span>
         </a>
-        <a href="http://www.strapui.com/" class="list-group-item">
+        <a href="#" class="list-group-item">
             <i class="fa fa-caret-down"></i>&nbsp;
             <span>{{ 'More Themes' | translate }}</span>
-        </a>
+        </a> -->
 
         <div class="header-fields">
             <a (click)="rltAndLtr()" class="list-group-item">
